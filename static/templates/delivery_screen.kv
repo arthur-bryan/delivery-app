@@ -1,0 +1,158 @@
+<DeliveryScreen>
+    name: "delivery_screen"
+
+    MDToolbar:
+        id: toolbar
+        type: "top"
+        title: "Registro de Entregas"
+        md_bg_color: .0, .15, .37, .7
+        font_style: "Custom"
+        font_name: app.default_font
+        font_size: dp(app.default_font_size)
+        left_action_items: [["menu", lambda x: nav_drawer.set_state("open")]]
+        right_action_items: [["account", lambda x: app.change_screen("user_screen")]]
+        pos_hint: {"center_x": 0.5, "center_y": 0.92}
+
+    MDFillRoundFlatIconButton:
+        id: establishment
+        icon: "arrow-down-drop-circle"
+        text: "Nome do estabelecimento"
+        text_color: .12, .12, .12
+        font_name: app.default_font
+        font_size: dp(app.default_font_size)
+        size_hint: .9, .06
+        pos_hint: {"center_x": .5, "center_y": .73}
+        on_release:
+            root.establishments_menu.open()
+
+    MDFillRoundFlatIconButton:
+        id: delivery_product
+        icon: "arrow-down-drop-circle"
+        text: "Tipo do produto"
+        text_color: .12, .12, .12
+        font_name: app.default_font
+        font_size: dp(app.default_font_size)
+        #md_bg_color: 1, 1, 1, 1
+        size_hint: .9, .06
+        pos_hint: {"center_x": .5, "center_y": .63}
+        on_release:
+            root.delivery_product_menu.open()
+
+    MDTextFieldRound:
+        id: delivery_value
+        max_text_length: 15
+        icon_left: "currency-brl"
+        font_size: dp(app.default_font_size)
+        hint_text: "Valor"
+        hint_text_color: .54, .57, .62
+        font_name: app.default_font
+        write_tab: False
+        multiline: False
+        normal_color: 1, 1, 1, 1
+        size_hint: .4, .07
+        pos_hint: {"center_x": .5, "center_y": .45}
+
+    MDFloatingActionButton:
+        icon: "minus"
+        md_bg_color: .98, .72, .09
+        pos_hint: {"center_x": .13, "center_y": .45}
+        on_release:
+            root.decrease_delivery_value(delivery_value.text)
+
+    MDFloatingActionButton:
+        icon: "plus"
+        md_bg_color: .98, .72, .09
+        pos_hint: {"center_x": .87, "center_y": .45}
+        on_release:
+            root.increase_delivery_value(delivery_value.text)
+
+
+    MDFillRoundFlatButton:
+        id: register_delivery_button
+        text: "Registrar entrega"
+        font_name: app.default_font
+        font_size: dp(app.default_font_size)
+        md_bg_color: .98, .72, .09
+        size_hint: .9, .06
+        pos_hint: {"center_x": .5, "center_y": .25}
+        on_release:
+            root.add_delivery(delivery_product.text, establishment.text, delivery_value.text)
+
+    MDFillRoundFlatButton:
+        id: see_deliveries_button
+        text: "Visualizar entregas"
+        text_color: .12, .12, .12
+        font_name: app.default_font
+        font_size: dp(app.default_font_size)
+        md_bg_color: 1, 1, 1, 1
+        size_hint: .9, .06
+        pos_hint: {"center_x": .5, "center_y": .25}
+        pos_hint: {"center_x": .5, "center_y": .15}
+        on_release:
+            app.change_screen("table_view_screen")
+
+    MDNavigationDrawer:
+        id: nav_drawer
+        BoxLayout:
+            orientation: "vertical"
+            spacing: dp(8)
+            padding: dp(8)
+
+            AnchorLayout:
+                anchor_x: "left"
+                size_hint_y: None
+                height: icon.height
+
+                Image:
+                    id: icon
+                    size_hit: None, None
+                    size: "56dp", "56dp"
+                    source: "static/images/icon.png"
+
+            MDLabel:
+                font_style: "Button"
+                text: "Finanças Delivery"
+                size_hint_y: None
+                height: self.texture_size[1]
+
+            ScrollView:
+                MDList:
+                    OneLineIconListItem:
+                        text: "Cadastrar estabelecimento"
+                        on_release:
+                            nav_drawer.set_state()
+                            app.change_screen("register_establishment_screen")
+                        IconLeftWidget:
+                            icon: "store-plus"
+
+                    OneLineIconListItem:
+                        text: "Visualizar estabelecimentos"
+                        on_release:
+                            nav_drawer.set_state()
+                            app.change_screen("view_establishments_screen")
+                        IconLeftWidget:
+                            icon: "store"
+
+                    OneLineIconListItem:
+                        text: "Visualizar estatisticas"
+                        on_release:
+                            nav_drawer.set_state()
+                            app.change_screen("in_development_screen")
+                        IconLeftWidget:
+                            icon: "chart-areaspline"
+
+                    OneLineIconListItem:
+                        text: "Visualizar entregas"
+                        on_release:
+                            nav_drawer.set_state()
+                            app.change_screen("table_view_screen")
+                        IconLeftWidget:
+                            icon: "table-eye"
+
+                    OneLineIconListItem:
+                        text: "Sair"
+                        on_release:
+                            app.change_screen("login_screen")
+                        IconLeftWidget:
+                            icon: "logout"
+

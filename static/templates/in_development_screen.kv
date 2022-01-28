@@ -1,0 +1,46 @@
+<MDScreen@BackgroundColorBehavior>
+    md_bg_color: 1, 1, 1, 1
+    background: "static/images/background.png"
+
+<InDevelopmentScreen>
+    name: "in_development_screen"
+
+    MDToolbar:
+        id: toolbar
+        type: "top"
+        title: "Finanças Delivery"
+        md_bg_color: .0, .15, .37, .7
+        font_style: "Custom"
+        font_name: app.default_font
+        font_size: dp(app.default_font_size)
+        left_action_items: [["arrow-left", lambda x: app.change_screen("delivery_screen")]]
+        right_action_items: [["account", lambda x: app.change_screen("user_screen")]]
+        pos_hint: {"center_x": 0.5, "center_y": 0.92}
+
+    Image:
+        source: "static/images/gif.gif"
+        size_hint: .8, .8
+        pos_hint: {"center_x": .5, "center_y": .50}
+        anim_delay: 0.01
+        anim_loop: 0
+        color: 1, 1, 1, 1
+
+    MDLabel:
+        id: login_title_label1
+        text: "Em densevolvimento"
+        font_name: app.default_font
+        font_size: dp(app.title_font_size)
+        halign: "center"
+        theme_text_color: "Custom"
+        text_color: 0.9922, 0.9922, 0.9961
+        pos_hint: {"center_x": .5, "center_y": .63}
+
+    MDLabel:
+        id: login_title_label2
+        text: "Disponivel futuramente"
+        font_name: app.default_font
+        font_size: dp(app.subtitle_font_size)
+        halign: "center"
+        theme_text_color: "Custom"
+        text_color: 0.9922, 0.9922, 0.9961
+        pos_hint: {"center_x": .5, "center_y": .48}

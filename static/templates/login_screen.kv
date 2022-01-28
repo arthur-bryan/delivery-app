@@ -1,0 +1,141 @@
+#: import LoginScreen classes.screens.login_screen.LoginScreen
+#: import RegisterScreen classes.screens.register_screen.RegisterScreen
+#: import DeliveryScreen classes.screens.delivery_screen.DeliveryScreen
+#: import RegisterEstablishmentScreen classes.screens.register_establishment_screen.RegisterEstablishmentScreen
+#: import TableViewScreen classes.screens.table_view_screen.TableViewScreen
+#: import ViewEstablishmentsScreen classes.screens.view_establishments_screen.ViewEstablishmentsScreen
+#: import UserScreen classes.screens.user_screen.UserScreen
+#: import InDevelopmentScreen classes.screens.in_development_screen.InDevelopmentScreen
+#: import WipeTransition kivy.uix.screenmanager.WipeTransition
+
+
+<MDScreen@BackgroundColorBehavior>
+    md_bg_color: 1, 1, 1, 1
+    background: "static/images/background.png"
+
+<LoginScreen>
+    name: "login_screen"
+
+    Image:
+        source: "static/images/gif.gif"
+        size_hint: .8, .8
+        pos_hint: {"center_x": .5, "center_y": .78}
+        anim_delay: 0.01
+        anim_loop: 0
+        color: 1, 1, 1, 1
+
+    MDLabel:
+        id: login_title_label1
+        text: "Finanças Delivery"
+        font_name: app.default_font
+        font_size: dp(app.title_font_size)
+        halign: "center"
+        theme_text_color: "Custom"
+        text_color: 0.9922, 0.9922, 0.9961
+        pos_hint: {"center_x": .5, "center_y": .85}
+
+    MDLabel:
+        id: login_title_label2
+        text: "Login"
+        font_name: app.default_font
+        font_size: dp(app.subtitle_font_size)
+        halign: "center"
+        theme_text_color: "Custom"
+        text_color: 0.9922, 0.9922, 0.9961
+        pos_hint: {"center_x": .5, "center_y": .7}
+
+    MDTextFieldRound:
+        id: username_text_field
+        max_text_length: 15
+        font_size: dp(app.default_font_size)
+        icon_left: "account"
+        hint_text: "Email"
+        text: app.saved_email
+        hint_text_color: .54, .57, .62
+        font_name: app.default_font
+        required: True
+        write_tab: False
+        on_text_validate: password_text_field.focus=True
+        multiline: False
+        helper_text_mode: "on_error"
+        helper_text: "Campo de email deve ser preenchido"
+        normal_color: .23, .28, .35
+        size_hint: .8, .07
+        pos_hint: {"center_x": .5, "center_y": .47}
+
+    MDTextFieldRound:
+        id: password_text_field
+        password: True
+        max_text_length: 20
+        font_size: dp(app.default_font_size)
+        icon_left: "key"
+        hint_text: "Senha"
+        text: app.saved_password
+        hint_text_color: .54, .57, .62
+        font_name: app.default_font
+        required: True
+        write_tab: False
+        on_text_validate:
+            root.do_login(remember_login_switch, username_text_field.text, password_text_field.text)
+        multiline: False
+        normal_color: .23, .28, .35
+        size_hint: .8, .07
+        pos_hint: {"center_x": .5, "center_y": .39}
+
+    MDIconButton:
+        icon: "eye-off"
+        ripple_scale: .5
+        theme_text_color: "Custom"
+        hint_text_color: .54, .57, .62
+        text_color: .1, .1, .1, .5
+        pos_hint: {"center_x": .863, "center_y": .391}
+        pos: password_text_field.width - self.width + dp(8), 0
+        on_release:
+            self.icon = "eye" if self.icon == "eye-off" else "eye-off"
+            password_text_field.password = False if password_text_field.password is True else True
+
+    MDLabel:
+        id: remember_login_label
+        text: "Lembrar-se"
+        font_name: app.default_font
+        font_size: dp(14)
+        halign: "center"
+        theme_text_color: "Custom"
+        text_color: 0.6922, 0.6922, 0.6961
+        pos_hint: {"center_x": .68, "center_y": .32}
+
+    MDSwitch:
+        id: remember_login_switch
+        pos_hint: {'center_x': .88, 'center_y': .32}
+
+    MDFloatingActionButton:
+        id: login_google_button
+        icon: "google"
+        md_bg_color: .98, .72, .09
+        pos_hint: {"center_x": .15, "center_y": .25}
+        on_release:
+            root.do_google_login()
+
+    MDFillRoundFlatButton:
+        id: login_button
+        text: "Log In"
+        font_name: app.default_font
+        font_size: dp(app.default_font_size)
+        md_bg_color: .98, .72, .09
+        size_hint: .68, .06
+        pos_hint: {"center_x": .61, "center_y": .25}
+        on_release:
+            root.do_login(remember_login_switch, username_text_field.text, password_text_field.text)
+
+
+    MDFillRoundFlatButton:
+        id: register_button
+        text: "Criar conta"
+        text_color: .12, .12, .12
+        font_name: app.default_font
+        font_size: dp(app.default_font_size)
+        md_bg_color: 1, 1, 1, 1
+        size_hint: .9, .06
+        pos_hint: {"center_x": .5, "center_y": .15}
+        on_release:
+            app.change_screen("register_screen")

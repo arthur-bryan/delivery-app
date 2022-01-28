@@ -1,0 +1,84 @@
+<RegisterEstablishmentScreen>
+    name: "register_establishment_screen"
+
+    MDToolbar:
+        type: "top"
+        title: "Cadastro de Estabalecimento"
+        md_bg_color: .0, .15, .37, .7
+        font_style: "Custom"
+        font_name: app.default_font
+        font_size: dp(app.default_font_size)
+        left_action_items: [["arrow-left", lambda x: app.change_screen("delivery_screen")]]
+        right_action_items: [["account", lambda x: app.change_screen("user_screen")]]
+        pos_hint: {"center_x": 0.5, "center_y": 0.92}
+
+
+    MDTextFieldRound:
+        id: establishment_name
+        max_text_length: 30
+        font_size: dp(app.default_font_size)
+        icon_left: "store"
+        hint_text: "Nome do estabelecimento"
+        hint_text_color: .54, .57, .62
+        font_name: app.default_font
+        required: True
+        write_tab: False
+        multiline: False
+        helper_text_mode: "on_error"
+        helper_text: "Campo de nome do estabelecimento deve ser preenchido"
+        normal_color: .23, .28, .35
+        size_hint: .8, .06
+        pos_hint: {"center_x": .5, "center_y": .73}
+
+    MDTextFieldRound:
+        id: delivery_value
+        max_text_length: 15
+        icon_left: "currency-brl"
+        font_size: dp(app.small_font_size)
+        hint_text: "Valor padrao"
+        hint_text_color: .54, .57, .62
+        font_name: app.default_font
+        write_tab: False
+        multiline: False
+        normal_color: 1, 1, 1, 1
+        size_hint: .4, .07
+        pos_hint: {"center_x": .5, "center_y": .45}
+
+    MDFloatingActionButton:
+        icon: "minus"
+        md_bg_color: .98, .72, .09
+        pos_hint: {"center_x": .13, "center_y": .45}
+        on_release:
+            root.decrease_delivery_value(delivery_value.text)
+
+    MDFloatingActionButton:
+        icon: "plus"
+        md_bg_color: .98, .72, .09
+        pos_hint: {"center_x": .87, "center_y": .45}
+        on_release:
+            root.increase_delivery_value(delivery_value.text)
+
+
+    MDFillRoundFlatButton:
+        id: register_delivery_button
+        text: "Registrar estabelecimento"
+        font_name: app.default_font
+        font_size: dp(app.default_font_size)
+        md_bg_color: .98, .72, .09
+        size_hint: .9, .06
+        pos_hint: {"center_x": .5, "center_y": .25}
+        on_release:
+            root.add_establishment(establishment_name.text, delivery_value.text)
+
+    MDFillRoundFlatButton:
+        id: see_deliveries_button
+        text: "Visualizar estabelecimentos"
+        text_color: .12, .12, .12
+        font_name: app.default_font
+        font_size: dp(app.default_font_size)
+        md_bg_color: 1, 1, 1, 1
+        size_hint: .9, .06
+        pos_hint: {"center_x": .5, "center_y": .25}
+        pos_hint: {"center_x": .5, "center_y": .15}
+        on_release:
+            app.change_screen("view_establishments_screen")

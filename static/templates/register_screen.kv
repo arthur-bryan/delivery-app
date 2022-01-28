@@ -1,0 +1,120 @@
+<RegisterScreen>
+    name: "register_screen"
+
+    Image:
+        source: "static/images/gif.gif"
+        size_hint: .8, .8
+        pos_hint: {"center_x": .5, "center_y": .78}
+        anim_delay: 0.01
+        anim_loop: 0
+        color: 1, 1, 1, 1
+
+    MDLabel:
+        id: register_title_label1
+        text: "Finanças Delivery"
+        font_name: app.default_font
+        font_size: dp(app.title_font_size)
+        halign: "center"
+        theme_text_color: "Custom"
+        text_color: 0.9922, 0.9922, 0.9961
+        pos_hint: {"center_x": .5, "center_y": .85}
+
+    MDLabel:
+        id: register_title_label2
+        text: "Criar Conta"
+        font_name: app.default_font
+        font_size: dp(app.subtitle_font_size)
+        halign: "center"
+        theme_text_color: "Custom"
+        text_color: 0.9922, 0.9922, 0.9961
+        pos_hint: {"center_x": .5, "center_y": .7}
+
+    MDTextFieldRound:
+        id: email_text_field
+        max_text_length: 15
+        font_size: dp(app.default_font_size)
+        icon_left: "email"
+        hint_text: "Email"
+        hint_text_color: .54, .57, .62
+        font_name: app.default_font
+        required: True
+        write_tab: False
+        on_text_validate: password_text_field.focus=True
+        multiline: False
+        helper_text_mode: "on_error"
+        helper_text: "Campo de email deve ser preenchido"
+        normal_color: .23, .28, .35
+        size_hint: .8, .07
+        pos_hint: {"center_x": .5, "center_y": .41}
+
+    MDTextFieldRound:
+        id: password_text_field
+        password: True
+        max_text_length: 20
+        font_size: dp(app.default_font_size)
+        icon_left: "key"
+        hint_text: "Senha"
+        hint_text_color: .54, .57, .62
+        font_name: app.default_font
+        required: True
+        write_tab: False
+        on_text_validate: confirm_password_text_field.focus=True
+        multiline: False
+        helper_text_mode: "on_error"
+        helper_text: "Campo de senha deve ser preenchido"
+        normal_color: .23, .28, .35
+        size_hint: .8, .07
+        pos_hint: {"center_x": .5, "center_y": .33}
+
+    MDIconButton:
+        icon: "eye-off"
+        ripple_scale: .5
+        theme_text_color: "Custom"
+        hint_text_color: .54, .57, .62
+        text_color: .1, .1, .1, .5
+        pos_hint: {"center_x": .863, "center_y": .33}
+        pos: password_text_field.width - self.width + dp(8), 0
+        on_release:
+            self.icon = "eye" if self.icon == "eye-off" else "eye-off"
+            password_text_field.password = False if password_text_field.password is True else True
+
+    MDTextFieldRound:
+        id: confirm_password_text_field
+        password: True
+        max_text_length: 20
+        font_size: dp(app.default_font_size)
+        icon_left: "key"
+        hint_text: "Confirmar senha"
+        hint_text_color: .54, .57, .62
+        font_name: app.default_font
+        required: True
+        write_tab: False
+        on_text_validate:
+            root.do_register(email_text_field.text, password_text_field.text, confirm_password_text_field.text)
+        multiline: False
+        normal_color: .23, .28, .35
+        size_hint: .8, .07
+        pos_hint: {"center_x": .5, "center_y": .25}
+
+    MDIconButton:
+        icon: "eye-off"
+        ripple_scale: .5
+        theme_text_color: "Custom"
+        hint_text_color: .54, .57, .62
+        text_color: .1, .1, .1, .5
+        pos_hint: {"center_x": .863, "center_y": .25}
+        pos: confirm_password_text_field.width - self.width + dp(8), 0
+        on_release:
+            self.icon = "eye" if self.icon == "eye-off" else "eye-off"
+            confirm_password_text_field.password = False if confirm_password_text_field.password is True else True
+
+    MDFillRoundFlatButton:
+        id: register_button
+        text: "Criar conta"
+        font_name: app.default_font
+        font_size: dp(app.default_font_size)
+        md_bg_color: .98, .72, .09
+        size_hint: .9, .06
+        pos_hint: {"center_x": .5, "center_y": .15}
+        on_release:
+            root.do_register(email_text_field.text, password_text_field.text, confirm_password_text_field.text)

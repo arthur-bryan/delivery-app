@@ -1,0 +1,116 @@
+<UserScreen>
+    name: "user_screen"
+
+    MDToolbar:
+        type: "top"
+        title: "Usuario"
+        md_bg_color: .0, .15, .37, .7
+        font_style: "Custom"
+        font_name: app.default_font
+        font_size: dp(app.title_font_size)
+        left_action_items: [["arrow-left", lambda x: app.change_screen("delivery_screen")]]
+        pos_hint: {"center_x": 0.5, "center_y": 0.92}
+
+    AnchorLayout:
+        anchor_x: "left"
+        size_hint_y: None
+        height: user_image.height
+        pos_hint: {"center_x": .5, "center_y": .7}
+
+        Image:
+            id: user_image
+            size_hit: None, None
+            size: "112dp", "112dp"
+            source: "static/images/user_icons/default_user.png"
+
+    #MDIconButton:
+    #    id: edit_user_photo_button
+    #    disabled: True
+    #    icon: "pencil"
+    #    pos_hint: {'center_x': .7, 'center_y': .6}
+    #    disabled: False
+    #    on_release: root.file_manager_open()
+
+    MDLabel:
+        id: user_label
+        padding_x: 20
+        font_name: app.default_font
+        font_size: dp(app.small_font_size)
+        halign: "left"
+        theme_text_color: "Custom"
+        text_color: 0.9922, 0.9922, 0.9961
+        pos_hint: {"center_x": .5, "center_y": .55}
+
+    MDLabel:
+        id: email_label
+        padding_x: 20
+        font_name: app.default_font
+        font_size: dp(app.small_font_size)
+        halign: "left"
+        theme_text_color: "Custom"
+        text_color: 0.9922, 0.9922, 0.9961
+        pos_hint: {"center_x": .5, "center_y": .5}
+
+    MDLabel:
+        id: deliveries_number_label
+        padding_x: 20
+        font_name: app.default_font
+        font_size: dp(app.small_font_size)
+        halign: "left"
+        theme_text_color: "Custom"
+        text_color: 0.9922, 0.9922, 0.9961
+        pos_hint: {"center_x": .5, "center_y": .45}
+
+    MDLabel:
+        id: deliveries_value_label
+        padding_x: 20
+        font_name: app.default_font
+        font_size: dp(app.small_font_size)
+        halign: "left"
+        theme_text_color: "Custom"
+        text_color: 0.9922, 0.9922, 0.9961
+        pos_hint: {"center_x": .5, "center_y": .40}
+
+    MDLabel:
+        id: level_label
+        padding_x: 20
+        font_name: app.default_font
+        font_size: dp(app.small_font_size)
+        halign: "left"
+        theme_text_color: "Custom"
+        text_color: 0.9922, 0.9922, 0.9961
+        pos_hint: {"center_x": .5, "center_y": .35}
+
+    MDLabel:
+        id: experience_label
+        padding_x: 20
+        font_name: app.default_font
+        font_size: dp(app.small_font_size)
+        halign: "left"
+        theme_text_color: "Custom"
+        text_color: 0.9922, 0.9922, 0.9961
+        pos_hint: {"center_x": .5, "center_y": .30}
+
+    MDLabel:
+        id: title_label
+        padding_x: 20
+        font_name: app.default_font
+        font_size: dp(app.small_font_size)
+        halign: "left"
+        theme_text_color: "Custom"
+        text_color: 0.9922, 0.9922, 0.9961
+        pos_hint: {"center_x": .5, "center_y": .25}
+
+    MDFillRoundFlatButton:
+        id: change_password_label
+        enabled: False
+        text: "Alterar senha"
+        text_color: .12, .12, .12
+        font_name: app.default_font
+        font_size: dp(app.default_font_size)
+        md_bg_color: 1, 1, 1, 1
+        size_hint: .9, .06
+        pos_hint: {"center_x": .5, "center_y": .15}
+        disabled: False
+        on_release:
+            app.firebase_manager.send_reset_password_email()

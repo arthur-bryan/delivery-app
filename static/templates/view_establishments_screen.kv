@@ -1,0 +1,12 @@
+<ViewEstablishmentsScreen>
+    name: "view_establishments_screen"
+
+    MDToolbar:
+        type: "top"
+        title: "Estabelecimentos"
+        md_bg_color: .0, .15, .37, .7
+        font_style: "Custom"
+        font_size: dp(app.title_font_size)
+        left_action_items: [["arrow-left", lambda x: app.change_screen("delivery_screen")]]
+        # right_action_items: [["account", lambda x: app.change_screen("user_screen")]]
+        pos_hint: {"center_x": 0.5, "center_y": 0.92}
