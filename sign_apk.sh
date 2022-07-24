@@ -1,1 +1,0 @@
-jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1  -signedjar bin/SSO-Oauth.apk  -storepass whoami@#0 -keypass whoami@#1 -keystore /home/bryan/Documents/keystore/release-key.keystore  bin/aplicativo-0.1-armeabi-v7a-release-unsigned.apk sso-oauth1
