@@ -6,11 +6,11 @@ import json
 
 
 firebase_config = {
-    "apiKey": "AIzaSyBBwd1waX4Iv4GXzt8n59TpvNOMheHTu_c",
-    "authDomain": "sso-oauth-ifpb.firebaseapp.com",
-    "databaseURL": "https://sso-oauth-ifpb-default-rtdb.firebaseio.com/",
-    "storageBucket": "sso-oauth-ifpb.appspot.com",
-    "serviceAccount": "adminsdk.json"
+    "apiKey": "",
+    "authDomain": "",
+    "databaseURL": "",
+    "storageBucket": "",
+    "serviceAccount": ""
 }
 
 firebase = pyrebase.initialize_app(firebase_config)
@@ -61,7 +61,7 @@ class FirebaseManager:
         try:
             self.__auth.create_user_with_email_and_password(email, password)
             user = User(email, email.split("@")[0])
-            self.__app.firebase_manager.register_user_in_realtime_database(user)
+            self.__app.firebase_manager.register_user_in_realtime_database(user.name, email)
             return True
         except (exceptions.HTTPError, exceptions.ConnectionError) as error:
             if type(error) == exceptions.HTTPError:
@@ -70,10 +70,10 @@ class FirebaseManager:
                 self.__app.show_toast_msg("Erro de conexao!")
             return False
 
-    def register_user_in_realtime_database(self, name, email):
+    def register_user_in_realtime_database(self, user, email):
         data = {
-            "email": email,
-            "name": name,
+            "email": user.name,
+            "name": user.email,
             "title": "Aprendiz do Grau",
             "level": 1,
             "experience": 0,
@@ -81,7 +81,7 @@ class FirebaseManager:
             "deliveries": [],
             "profile_picture": "static/images/user_icons/default_user.png"
         }
-        self.__db.child("users").child(name).set(data)
+        self.__db.child("users").child(user.name).set(data)
 
     def update_profile_photo(self, user, new_photo):
         data = {

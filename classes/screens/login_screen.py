@@ -30,7 +30,7 @@ class LoginScreen(MDScreen):
                                            password="")
             self.__app.logged_in_user = User(email,
                                              user_name,
-                                             self.__app.firebase_manager.get_user_data(user_name))
+                                             self.__app.firebase_manager.get_user_data(user_name, email))
             self.__app.show_toast_msg(f"Bem vindo(a), {self.__app.logged_in_user.name}!")
             self.manager.current = "delivery_screen"
             return True

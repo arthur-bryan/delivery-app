@@ -24,7 +24,6 @@ class UserScreen(MDScreen):
     def close_dialog(self, obj):
         self.dialog.dismiss()
 
-
     def on_pre_enter(self, *args):
         self.user = self.__app.logged_in_user
         self.user.profile_photo = self.__app.firebase_manager.get_user_profile_photo(self.user.name)

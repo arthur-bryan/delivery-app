@@ -2,6 +2,7 @@ from kivy.app import App
 
 RUNNING_APP = App.get_running_app()
 
+
 class User:
 
     def __init__(self, email, name, data=None):

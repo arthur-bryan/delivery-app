@@ -1,36 +1,46 @@
-# Demonstracao SSO com OAuth2 - Google
-Aplicacao para demonstracao pratica do funcionamento do OAuth utilizando o Google como servidor.
+# Delivery App
+Simple app made with Kivy for registering deliveries for. This was a freelance project, to help a friend who delivered food.
 
-## Instalacao:
+## Some things I learned in this project:
 
-- Descompactar o arquivo
-- Entrar na pasta "entregas"
-- Rodar o comando: python3 -m pip install -r requirements.txt
+- Kivy - Kivy is a cross-platform framework for writing desktop and mobile apps. 
+- KivyMD - Matherial Design widgets for Kivy.
+- Buildozer - The app can be compiled do run on Android phone.
+- Oauth protocol - This app uses Google Oauth, so you can log in with your Google account.
+- Google Firebase - The app uses the Google Firebase Real Time Database to store data (json).
 
-## Para desktop:
+## Instalation:
+#### Some sensitive data was removed from source, but some of them must be hardcoded when compiling for android.
+#### This code will not run if you run in without editing the `main.py` and `classes/firebase_manager.py` files.
 
-- Entrar na pasta "entregas"
-- Rodar o comando:
-    ```sh
-    python3 -m pip install -r requirements.txt
-    ```
-#### Apesar de as bibliotecas utilizadas serem multiplataforma, foi testado apenas no Linux
 
-## Para android:
+### For desktop (only tested Linux):
+```sh
+git clone https://github.com/arthur-bryan/delivery-app
+cd delivery-app
+python3 -m pip install -r requirements.txt
+python3 main.py
+```
 
-- Entrar na pasta "entregas"
-- Instalar o auxiliar de compilacao [buildozer]("https://buildozer.readthedocs.io/en/latest/installation.html")
-- Conectar o celular via USB e permitir a depuracao e transferencia de arquivos via USB
-- Rodar o comando:
+### For Android:
+- Do the same step as above, but don run the main.py yet.
+- Install the compilation auxiliar [buildozer]("https://buildozer.readthedocs.io/en/latest/installation.html")
+- Edit the `buildozer.spec` file to meet the requeriments for compiling for your Android.
+- Run:
     ```sh
     buildozer android debug deploy run
     ```
-#### Na execucao da instalacao para android, sera necessaria a compilacao do codigo. Isso levara em media 5 minutos e caso tudo ocorra bem, o aplicativo ira iniciar automaticamente.
-#### Na instalacao para android, nao desconectar o celular do USB ou desativar a depuracao ate que a aplicacao inicialize. Depois, pode remover.
+  
+#### PS: Your phone must be with USB debugging enabled and the USB cable connected to the PC. First compile should take more than 5 minutes.
+- Search about hot to complie the binary and sign it (this is needed for the OAuth to work).
 
-## Codigo da implementacao do Oauth pode ser encontrado nos arquivos:
-
-- main.py : Onde sao setados o CLIENT_ID e o CLIENT_SECRET
-- google_auth.py : Logica do browser, redirecionamentos, uso da oauthlib, tratamentos e login em si (o local do arquivo varia de cada instalacao. Aqui esta em "~/venvs/entregas/lib/python3.9/site-packages/kivyauth/desktop/google_auth.py".
-No caso de instalacao fora de ambiente virtual, pode ser que se encontre em "/lib/python<versao>/site-packages/kivyauth/desktop/google_auth.py"
-- classes/screens/login_screen.py: Onde a logica do login se inicia. A funcao "do_google_login()" inicia chamadas de funcoes subsequentes.
+![login-app](https://user-images.githubusercontent.com/34891953/180631047-7b2bb5cc-4502-42c7-ba44-60dee7fef3eb.png)
+![main-app](https://user-images.githubusercontent.com/34891953/180631048-a6e251d5-da26-468b-a9af-dc768a9eb92e.png)
+![main-app-2](https://user-images.githubusercontent.com/34891953/180631049-2ec2496c-f4fa-4175-8a82-8688119cb308.png)
+![main-app-3](https://user-images.githubusercontent.com/34891953/180631050-13d616df-13a0-4c9d-9ae6-6822c3fa907c.png)
+![main-app-4](https://user-images.githubusercontent.com/34891953/180631051-8cb4405d-9901-4390-b7cc-fc1bc1c4b519.png)
+![main-app-db-update](https://user-images.githubusercontent.com/34891953/180631052-176fdfe9-443c-4a79-a88f-a6abff9e198e.png)
+![new-stablishment-app](https://user-images.githubusercontent.com/34891953/180631053-b844b491-4f85-41f9-8c7f-e146ef32787a.png)
+![image](https://user-images.githubusercontent.com/34891953/180631064-74b851a2-37bd-4600-9073-dac5c2d08d1a.png)
+![image](https://user-images.githubusercontent.com/34891953/180631074-e2814a8e-81b6-4347-878a-1f3f18a32078.png)
+![image](https://user-images.githubusercontent.com/34891953/180631085-ec5dcbd2-286b-4ce7-a3db-125c5825a532.png)

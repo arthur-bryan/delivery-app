@@ -19,9 +19,9 @@ from kivy.clock import mainthread
 from os import path
 
 
-CREDENTIALS_FILE = "credentials.json"
-GOOGLE_CLIENT_ID = "910209521956-co8gl78jbm5cafl7idr1eu2n37b3ujmh.apps.googleusercontent.com"
-GOOGLE_CLIENT_SCRET = "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"
+CREDENTIALS_FILE = ""
+GOOGLE_CLIENT_ID = ""
+GOOGLE_CLIENT_SCRET = ""
 
 
 class Manager(ScreenManager):
